@@ -179,7 +179,7 @@ nginx: configuration file /etc/nginx/nginx.conf test is successful
 root@hiplet-48656:~# 
 ```
 
-Проверим, что nginx слушает 8889 порт:
+Проверим, что nginx слушает 8888 порт:
 ```bash
 root@hiplet-48656:~# nginx -s reload
 2025/10/30 10:08:33 [notice] 694737#694737: signal process started
@@ -188,7 +188,7 @@ tcp   LISTEN 0      511             127.0.0.1:8888      0.0.0.0:*
 root@hiplet-48656:~# 
 ```
 
-Делаем запросы и видим, что отвечает первый (primary) сервер:
+Делаем запросы и видим, что отвечает первый сервер:
 ```bash
 root@hiplet-48656:~# curl http://127.0.0.1:8888
 <h1>Response from Backend Server 1</h1>
