@@ -764,3 +764,35 @@ root@hiplet-48656:~#
 ```
 
 Можно увидеть, как запрос приходит на nginx, проксируется на сервер и при этом передаётся нужный нам заголовок `X-high-load-test`.
+
+
+### Frame 4: запрос от клиента к nginx (порт 8888)
+```
+GET / HTTP/1.1
+Host: 127.0.0.1:8888
+User-Agent: curl/8.5.0
+Accept: */*
+```
+
+### Frame 9: запрос от nginx к backend1 (порт 8081)
+```
+GET / HTTP/1.0
+X-high-load-test: 123
+Host: 127.0.0.1
+Connection: close
+User-Agent: curl/8.5.0
+Accept: */*
+```
+
+### Frame 13: ответ от backend1 к nginx
+```
+HTTP/1.0 200 OK
+Server: SimpleHTTP/0.6 Python/3.12.3
+Content-Length: 40
+
+<h1>Response from Backend Server 1</h1>
+```
+
+### Frame 18: ответ от nginx к curl'у
+nginx возвращает ответ клиенту (242 байта данных).
+
